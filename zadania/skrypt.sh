@@ -1,20 +1,20 @@
-#!/bin/bash
+katalog_zrodlowy="/home/ubuntu/Pobrane"
 
-# Ścieżka do katalogu na dysku zewnętrznym
-sciezka_zewnetrzna="/ścieżka/do/katalogu/na/dysku/zewnętrznym"
-
-# Sprawdzenie czy istnieje katalog pobrane
-if [ ! -d "Pobrane" ]; then
-    echo "Katalog 'pobrane' nie istnieje."
+if [ ! -d "$katalog_zrodlowy" ]; then
+    echo "Katalog '$katalog_zrodlowy' nie istnieje."
     exit 1
 fi
 
-# Nazwa pliku kopii z datą
+# użyłem katalogu dokumenty zamiast dysku zewnętrznego
+katalog_zewnetrzny="/home/ubuntu/Dokumenty"
+
 data=$(date +"%Y.%m.%d")
-nazwa_pliku="backup_${data}"
 
-# Wykonanie kopii zawartości katalogu pobrane do katalogu na dysku zewnętrznym z dodaniem daty
-cp -r pobrane "${sciezka_zewnetrzna}/${nazwa_pliku}"
+nazwa_katalogu="backup_${data}"
 
-echo "Kopia zawartości katalogu 'pobrane' została wykonana i zapisana jako '${nazwa_pliku}' na dysku zewnętrznym."
+mkdir -p "${katalog_zewnetrzny}/${nazwa_katalogu}"
+
+cp -r "${katalog_zrodlowy}/"* "${katalog_zewnetrzny}/${nazwa_katalogu}/"
+
+echo "Zawartość katalogu 'pobrane' została skopiowana jako '${nazwa_katalogu}' na dysku zewnętrznym."
 
